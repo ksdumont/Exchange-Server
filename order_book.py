@@ -18,7 +18,6 @@ def process_order(order):
     sell_currency = order['sell_currency']
     buy_amount = order['buy_amount']
     sell_amount = order['sell_amount']
-    # pass
 
     new_order = Order(sender_pk=sender_pk, receiver_pk=receiver_pk, buy_currency=buy_currency,
                       sell_currency=sell_currency, buy_amount=buy_amount, sell_amount=sell_amount, filled=None)
@@ -40,13 +39,12 @@ def process_order(order):
         new_order.counterparty_id = existing_order.id
         session.commit
 
-        # need to create a new field for creator_id later below or add to a list of fields to pass, depending on approach
 
         if new_order.sell_amount > existing_order.buy_amount:
             child_buy_amount = (new_order.sell_amount - existing_order.buy_amount) * new_order.buy_amount/new_order.sell_amount
             child_sell_amount = new_order.sell_amount - existing_order.buy_amount
             order_child_creator_id = new_order.id
-            # add updated fields to child order
+
             child_order = Order(sender_pk=sender_pk,
                                 receiver_pk=receiver_pk,
                                 buy_currency=buy_currency,

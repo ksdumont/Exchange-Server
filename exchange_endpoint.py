@@ -112,7 +112,7 @@ def get_algo_keys():
     return algo_sk, algo_pk
 
 
-def get_eth_keys(filename="mnemonic.txt"):
+def get_eth_keys(filename="eth_mnemonic.txt"):
     w3 = Web3()
     w3.eth.account.enable_unaudited_hdwallet_features()
 
